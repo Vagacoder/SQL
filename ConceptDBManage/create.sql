@@ -1,23 +1,23 @@
 create table Rep
 (
 
-    RepNum		int(10)		not NULL,
+    RepNum		char(2)		not NULL,
 
-    LastName	char(50)	not null,
+    LastName	char(15)	not null,
 
-    FirstName	char(50)	not null,
+    FirstName	char(15)	not null,
 
-    Street		char(50)	null,
+    Street		char(15)	null,
 
-    City		char(50)	null,
+    City		char(15)	null,
 
-    State		char(50)	null,
+    State		char(2)	null,
 
-    PostalCode	char(10)	null,
+    PostalCode	char(5)	null,
 
-    Commision	decimal(20)	null,
+    Commision	decimal(7,2)	null,
 
-    Rate		float(5)	null
+    Rate		decimal(3,2)	null
 );
 
 
