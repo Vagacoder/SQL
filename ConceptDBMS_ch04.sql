@@ -46,11 +46,50 @@ show index from orders;
 
 -- create an index on cust_id in the table of customers
 select * from customers;
-create index cust_id_index on customers (cust_id);
-select cust_id_index, cust_name from customers;
+create index cust_name_index on customers (cust_name);
 
+alter table customers add unique cust_state_index(cust_state);
 
 -- delete an index
-drop index customers.cust_id_index;
+drop index cust_state_index on customers;
+drop index cust_name_index on customers;
+alter table customers drop index cust_name_index;
 
+-- Security
+Grant select, insert, update on customers to jack;
+revoke select, insert, update on customers from jack;
 
+-- Integrity rules
+-- -- Entity integrity
+-- ---- primary key
+-- -- Referential integrity
+-- ---- foreign key
+-- -- Legal-value integrity
+-- ---- check
+
+-- STRUCTURE CHANGE
+-- view systables (all)
+SELECT * FROM information_schema.tables;
+-- view syscolumns (all)
+SELECT * FROM information_schema.columns;
+-- view specific columns
+select column_name, column_key, data_type from information_schema.columns where table_name = 'customers';
+-- view VIEWS (all)
+select * from information_schema.views;
+
+-- PROCEDURE
+-- this is for mysql terminal, need switch delimiter before input procedure
+delimiter //
+-- input procedure
+CREATE PROCEDURE dorepeat(p1 INT)
+BEGIN
+	SET @x = 0;
+	REPEAT SET @x = @x + 1; UNTIL @x > p1 END REPEAT;
+END
+//
+-- switch delimiter back to ';'
+delimiter ;
+-- call procedure
+CALL dorepeat(1000);
+-- check result
+SELECT @x;
